@@ -72,7 +72,11 @@ class NOAA_CSL_download:
     }
 
     point_extract_structure = {
-
+        'point_Other':'OtherPoint',
+        'point_EGU':'PtEGU',
+        'point_Industry':'PtIndustry',
+        'point_OG':'PtOG',
+        'point_VCP':'PtVCP'
     }
     
     def __init__(self,base_data_storage_path):
@@ -86,53 +90,64 @@ class NOAA_CSL_download:
         full_url = self.full_url_create(sector,year_str,month_str)
         tar_fname = os.path.split(full_url)[1]
         download_path = os.path.join(self.base_data_storage_path,'.temp')#,sector,year_str,month_str)
-        self.download_tar(full_url,download_path)
-        self.extract_tar(os.path.join(download_path,tar_fname))
-        store_path = self.sector_dir_setup(sector,year_str,month_str)
-        self.mv_extracted(sector,month_str,download_path,store_path)
-        self.sector_extra_org(sector,store_path)
-        self.delete_tar(os.path.join(download_path,tar_fname))
+        dir_dict = self.dir_dict_setup(sector,year_str,month_str,download_path)
+        #self.download_tar(full_url,download_path)
+        #self.extract_tar(os.path.join(download_path,tar_fname))
+        #self.mv_extracted(dir_dict)
+        self.clear_folder(download_path)
+        #store_paths = self.sector_dir_setup(sector,year_str,month_str)
+        #self.mv_extracted(sector,month_str,download_path,store_paths)
+        #self.sector_extra_org(sector,store_paths)
+        #self.delete_tar(os.path.join(download_path,tar_fname))
 
-    def sector_dir_setup(self,sector,*args):
-        if self.sector_details[sector]['grid_type'] == 'area':
-            store_path = os.path.join(self.base_data_storage_path,sector,*args)
-            try:
-                os.makedirs(store_path)
-            except FileExistsError:
-                print(f'Path to {store_path} already exists')
-                return store_path
-        elif self.sector_details[sector]['grid_type'] == 'point':
+    def dir_dict_setup(self,sector,year_str,month_str,download_path):
+        prefix_temp = self.sector_details[sector]['extracted_preday_prefix']
+        prefix = replace_all_strs(prefix_temp,{'MonthXX':month_str})
+        dir_dict = {}
+        if sector == 'point':
             pass
-        return store_path
+        else:
+            to_path = os.path.join(self.base_data_storage_path,sector,year_str,month_str)
+            try:
+                os.makedirs(to_path)
+            except FileExistsError:
+                print(f'Path exists at {to_path}')
+            dir_dict[sector] = {
+                'from_path':os.path.join(download_path,prefix),
+                'to_path':to_path
+            }
+        return dir_dict
 
+    def mv_extracted(self,dir_dict):
+        for sector_id,path_details in dir_dict.items():
+            for f in os.listdir(path_details['from_path']):
+                mv_from = os.path.join(path_details['from_path'],f)
+                mv_to = os.path.join(path_details['to_path'])
+                shutil.move(mv_from,mv_to)
 
-    def sector_extra_org(self,sector,path_with_days):
+    def sector_extra_org(self,sector,store_paths):
+        path_with_days = store_paths[sector]
         if sector in ['area_AG']:
             to_remove = glob.glob(f'{path_with_days}/*/*.rds')
             to_remove.extend(glob.glob(f'{path_with_days}/*/.RData'))
             for file in to_remove:
                 os.remove(file)
 
+    def delete_file(self,full_path):
+        print(f'Deleting {full_path}')
+        os.remove(full_path)
+    
+    def delete_tree(self,tree_path):
+        print(f'Deleting tree {tree_path}')
+        shutil.rmtree(tree_path)
 
-    def mv_extracted(self,sector,month_str,download_path,store_path):
-        print(f'Moving extracted day files to {store_path}')
-        prefix_temp = self.sector_details[sector]['extracted_preday_prefix']
-        prefix = replace_all_strs(prefix_temp,{'MonthXX':month_str})
-        extracted_path = os.path.join(download_path,prefix)
-
-        for f in os.listdir(extracted_path):
-            shutil.move(os.path.join(extracted_path,f),store_path)
-
-        top_level_prefix = prefix.split('/')[0]
-        rm_tree = os.path.join(download_path,top_level_prefix)
-        print(f'Removing tree {rm_tree}')
-        shutil.rmtree(rm_tree)
-
-    def delete_tar(self,full_tar_path):
-        print(f'Deleting tar {full_tar_path}')
-        command = ['rm',full_tar_path]
-        proc = subprocess.Popen(command)
-        proc.communicate()
+    def clear_folder(self,path):
+        for f in os.listdir(path):
+            fullpath = os.path.join(path,f)
+            if os.path.isfile(fullpath):
+                self.delete_file(fullpath)
+            if os.path.isdir(fullpath):
+                self.delete_tree(fullpath)
 
     def extract_tar(self,full_fname):
         '''Extract a tar file to the path it is already in 
@@ -217,4 +232,4 @@ def replace_all_strs(text,dic):
 
 if __name__ == "__main__":
     ncd = NOAA_CSL_download('/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL')
-    ncd.retrieve_format_data('area_AG',2019,1)
+    ncd.retrieve_format_data('area_OG',2019,1)
