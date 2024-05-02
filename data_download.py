@@ -351,7 +351,7 @@ def check_space(path,excep_thresh='8Tb'):
     Raises:
     MemoryError : if the amount of space on the filesystem containing the path is below the excep_thresh
     '''
-    
+
     disk_usage = shutil.disk_usage(path)
     total_bytes,used_bytes,free_bytes = int(disk_usage.total), int(disk_usage.used), int(disk_usage.free)
     thresh_bytes = human_to_bytes(excep_thresh)
@@ -369,6 +369,7 @@ def check_space(path,excep_thresh='8Tb'):
 
 def human_to_bytes(human_readable, units=['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb']):
     '''Makes a human readable storage size into a bytes integer
+    #TODO Different definitions for this and the other direction (1000 bytes per kb vs 1024)
     
     Args:
     human_readable (str) : a human readable string representing space (something like 2.1Gb, or 5Tb)
@@ -395,6 +396,7 @@ def human_to_bytes(human_readable, units=['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb']):
 
 def bytes_to_human(bytes,units=['b','Kb','Mb','Gb','Tb','Pb']):
     '''Converts an integer bytes into a human readable string notation
+    #TODO Different definitions for this and the other direction (1000 bytes per kb vs 1024)
     
     Args: 
     bytes (int) : integer bytes
