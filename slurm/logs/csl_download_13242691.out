@@ -1,0 +1,38 @@
+Sufficient space detected in /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data
+Found 18Tb free space
+Downloading, extracting, and organizing data for area_onroad_gasoline 2019 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2019/FIVE_onroad-gas_2019_Month07.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2019_Month07.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Month07/
+Month07/weekdy/
+Month07/weekdy/onroad_00to12Z.nc
+Month07/weekdy/onroad_12to24Z.nc
+Month07/satdy/
+Month07/satdy/onroad_00to12Z.nc
+Month07/satdy/onroad_12to24Z.nc
+Month07/sundy/
+Month07/sundy/onroad_00to12Z.nc
+Month07/sundy/onroad_12to24Z.nc
+Month07/fuel_scalings.csv
+Month07/fuel_avg.nc
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2019_Month07.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_onroad_diesel 2019 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2019/FIVE_onroad-dsl_2019_Month07.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2019_Month07.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Month07/
+Month07/weekdy/
+Month07/weekdy/onroad_00to12Z.nc
+Month07/weekdy/onroad_12to24Z.nc
+Month07/satdy/
+Month07/satdy/onroad_00to12Z.nc
+Month07/satdy/onroad_12to24Z.nc
+Month07/sundy/
+Month07/sundy/onroad_00to12Z.nc
+Month07/sundy/onroad_12to24Z.nc
+Month07/fuel_scalings.csv
+Month07/fuel_avg.nc
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2019_Month07.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_offroad 2019 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2019/FIVE_offroad_2019_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp

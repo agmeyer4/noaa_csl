@@ -12,8 +12,9 @@ More information can be found here: https://csl.noaa.gov/groups/csl7/measurement
 **** 
 A warning about storage space: One month of data from all sectors is approximately 131 Gigabytes. There is a function here that will alert
 the user if there is less than a defined amount (default = 6Tb) of space on the filesystem where the data will end up (base_data_storage_path). 
-The dataset from 2019 Month01 to 2021 Month08 is approximately 4.5 Terabytes. 
+The dataset from 2019 Month01 to 2021 Month08 is approximately 4.5 Terabytes. Downloading this entire dataset will take ~13 hours. 
 ****
+
 
 TODO Don't download if the data is already there
 '''
@@ -175,7 +176,7 @@ class NOAA_CSL_download:
 
         print(f'Downloading {full_url} to {download_path}')
         command = ['wget',full_url,'-P',download_path] #create the wget command 
-        proc = subprocess.Popen(command) #call the command
+        proc = subprocess.Popen(command,stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT) #call the command
         proc.communicate() #show the stdout and sterr 
 
     def extract_tar(self,full_fname):
@@ -188,7 +189,7 @@ class NOAA_CSL_download:
         path,fname = os.path.split(full_fname) #get the path and the name
         print(f'Extracting {fname} into {path}')
         command = ['tar','xvf',os.path.join(path,fname),'-C',path] #define the tar extract command
-        proc = subprocess.Popen(command) #call the command
+        proc = subprocess.Popen(command,stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT) #call the command
         proc.communicate() #output
 
     def dir_dict_setup(self,sector,year_str,month_str,download_path):
@@ -323,10 +324,15 @@ def main():
     base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data' #where the data will be stored
     ncf.check_space(base_data_storage_path,excep_thresh='6Tb') #ensure there is enough space in the director
     ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='COVID') #setup the downloader
-    for sector in ncd.sector_details.keys(): #loop through sectors
-        ncd.retrieve_format_data(sector,2019,6)
-    t2 = time.time()
-    print(t1,t2,t2-t1)
+    # for sector in ncd.sector_details.keys(): #loop through sectors
+    #     ncd.retrieve_format_data(sector,2019,6)
+    
+
+    year = 2019
+    for month in range(7,13):
+        for sector in ncd.sector_details.keys(): #loop through sectors
+            ncd.retrieve_format_data(sector,year,month)
+
     # Full Download
     # for year in [2019,2020,2021]:
     #     for month in range(1,13):
@@ -334,6 +340,9 @@ def main():
     #             continue
     #         for sector in ncd.sector_details.keys(): #loop through sectors
     #             ncd.retrieve_format_data(sector,year,month)
+
+    t2 = time.time()
+    print(f'total runtime (seconds) = {t2-t1}')
 
 if __name__ == "__main__":
     main()
