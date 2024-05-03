@@ -63,7 +63,7 @@ class NOAA_CSL_download:
             'url_folder':'NRT_area-point_emissions/FOG-NEI17_Oil_and_Gas',
             'url_fname_temp':'areaOG_emis_year_MonthXX.tar.gz',
             'years':['2019','2020','2021'],
-            'extracted_preday_prefix':'wrk/d2/charkins/CSD_Emissions/conus4k/AREA19_OG/MonthXX/AreaFOGnei17',
+            'extracted_preday_prefix':'wrk/d2/charkins/CSD_Emissions/conus4k/AREAyr2d_OG/MonthXX/AreaFOGnei17',
             'grid_type':'area'
         },
         'area_AG':{
@@ -204,9 +204,9 @@ class NOAA_CSL_download:
         Returns:
         dir_dict (dict) : dictionary containing the sectors and the "from" and "to" paths defining where files should come from and go
         '''
-
+        yr2d = year_str[2:4]
         prefix_temp = self.sector_details[sector]['extracted_preday_prefix'] #get the prefix template for the sector
-        prefix = ncf.replace_all_strs(prefix_temp,{'MonthXX':month_str}) #get the real prefix by replacing the month (if necessary)
+        prefix = ncf.replace_all_strs(prefix_temp,{'MonthXX':month_str,'yr2d':yr2d}) #get the real prefix by replacing the month (if necessary)
         dir_dict = {} #initialize the data dict
         if sector == 'point': #for the "point" sector, we must define different "subsectors" that will rise to top level sectors when moving
             for new_subsec, old_subsec in self.point_extract_structure.items():
@@ -324,14 +324,18 @@ def main():
     base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data' #where the data will be stored
     ncf.check_space(base_data_storage_path,excep_thresh='6Tb') #ensure there is enough space in the director
     ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='COVID') #setup the downloader
-    # for sector in ncd.sector_details.keys(): #loop through sectors
-    #     ncd.retrieve_format_data(sector,2019,6)
+    for sector in ncd.sector_details.keys(): #loop through sectors
+        if sector in ['area_onroad_diesel','area_onroad_gasoline','area_offroad','area_OG']:
+            continue
+        ncd.retrieve_format_data(sector,2020,1)
     
+    #ncd.retrieve_format_data('area_OG',2020,1)
 
-    year = 2019
-    for month in range(7,13):
-        for sector in ncd.sector_details.keys(): #loop through sectors
-            ncd.retrieve_format_data(sector,year,month)
+
+    # year = 2019
+    # for month in range(7,13):
+    #     for sector in ncd.sector_details.keys(): #loop through sectors
+    #         ncd.retrieve_format_data(sector,year,month)
 
     # Full Download
     # for year in [2019,2020,2021]:
