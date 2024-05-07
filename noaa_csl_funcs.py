@@ -33,7 +33,7 @@ def replace_all_strs(text,dic):
     return text
 
 def month_int_to_str(month_int):
-        '''Converts a month integer to a two character string
+        '''Converts a month integer to a character string like "MonthXX"
         
         Args: 
         month_int (int) : the integer of the month (1,2,12,etc)

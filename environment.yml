@@ -1,0 +1,19 @@
+name: noaa_csl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geopandas
+  - numpy
+  - pandas
+  - cartopy
+  - matplotlib
+  - xarray
+  - ipykernel
+  - netcdf4
+  - pip
+  - dask
+  - xesmf
+  - salem
+  - scikit-image
+  - pip:
