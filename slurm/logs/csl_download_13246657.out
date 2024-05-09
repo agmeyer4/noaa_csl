@@ -122,3 +122,9 @@ Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/area
 Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaIndustry
 Downloading, extracting, and organizing data for area_Other 2020 Month04
 Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2020/areaOtherArea_emis_2020_Month04.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOtherArea_emis_2020_Month04.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOtherArea_emis_2020_Month04.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/OtherArea
+Downloading, extracting, and organizing data for area_VCP 2020 Month04
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2020/areaVCP_emis_2020_Month04.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaVCP_emis_2020_Month04.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
