@@ -1,0 +1,96 @@
+name,unit,description
+HC54,mole hr^-1 gridcell^-1,D4-Siloxane
+HC55,mole hr^-1 gridcell^-1,D5-Siloxane
+HC56,mole hr^-1 gridcell^-1,Other Siloxane
+HC57,mole hr^-1 gridcell^-1,NROG
+HC58,mole hr^-1 gridcell^-1,PCBTF
+HC59,mole hr^-1 gridcell^-1,PDCBZ
+HC60,mole hr^-1 gridcell^-1,Propanal
+HC61,mole hr^-1 gridcell^-1,Butanal
+HC62,mole hr^-1 gridcell^-1,Pentanal
+HC63,mole hr^-1 gridcell^-1,Hexanal
+HC64,mole hr^-1 gridcell^-1,Heptanal
+HC65,mole hr^-1 gridcell^-1,Octanal
+HC66,mole hr^-1 gridcell^-1,Nonanal
+HC67,mole hr^-1 gridcell^-1,Unsaturated Aldehydes
+HC68,mole hr^-1 gridcell^-1,C10+ Aldehydes
+CO2,metric_Ton hr^-1 gridcell^-1,FIVE emission
+CO,metric_Ton hr^-1 gridcell^-1,FIVE emission
+NH3,metric_Ton hr^-1 gridcell^-1,FIVE emission
+NOX,metric_Ton(NO2 equiv) hr^-1 gridcell^-1,FIVE emission
+PM10-PRI,metric_Ton hr^-1 gridcell^-1,FIVE emission
+PM25-PRI,metric_Ton hr^-1 gridcell^-1,FIVE emission
+SO2,metric_Ton hr^-1 gridcell^-1,FIVE emission
+VOC,metric_Ton hr^-1 gridcell^-1,FIVE emission
+HC01,mole hr^-1 gridcell^-1,Methane
+HC02,mole hr^-1 gridcell^-1,Ethane+Alkanes with k(OH)< 500 ppm^-1-min^-1
+HC03,mole hr^-1 gridcell^-1,"Alkanes with 500<k(OH)<2500 ppm^-1-min^-1,EXCLUDE(C3H8,C2H2,ethanol,acids)"
+HC04,mole hr^-1 gridcell^-1,"Alkanes with 2500<k(OH)<5000 ppm^-1-min^-1,EXCLUDE(butanes)"
+HC05,mole hr^-1 gridcell^-1,"Alkanes with 5000<k(OH)<10000 ppm^-1-min^-1,EXCLUDE(pentanes)"
+HC06,mole hr^-1 gridcell^-1,"Alkanes with k(OH)>10000 ppm^-1-min^-1,EXCLUDE(ethylene glycol)"
+HC07,mole hr^-1 gridcell^-1,Ethylene
+HC08,mole hr^-1 gridcell^-1,Alkenes with k(OH)<20000 ppm^-1-min^-1
+HC09,mole hr^-1 gridcell^-1,"Alkenes with k(OH)>20000 ppm^-1-min^-1,EXCLUDE(dienes and styrenes)"
+HC10,mole hr^-1 gridcell^-1,Anthropogenic Isoprene
+HC11,mole hr^-1 gridcell^-1,Anthropogenic Terpenes (VCPs)
+HC12,mole hr^-1 gridcell^-1,"Aromatics with k(OH)<20000 ppm^-1-min^-1,EXCLUDE(benzene and toluene)"
+HC13,mole hr^-1 gridcell^-1,"Aromatics with k(OH)<20000 ppm^-1-min^-1,EXCLUDE((xylenes)"
+HC14,mole hr^-1 gridcell^-1,Formaldehyde
+HC15,mole hr^-1 gridcell^-1,Acetaldehyde
+HC16,mole hr^-1 gridcell^-1,>C2 aldehydes
+HC17,mole hr^-1 gridcell^-1,Benzaldehyde
+HC18,mole hr^-1 gridcell^-1,Acetone
+HC19,mole hr^-1 gridcell^-1,Methylethyl ketone
+HC20,mole hr^-1 gridcell^-1,PRD2 SAPRAC species (aromatic ketones)
+HC21,mole hr^-1 gridcell^-1,Methanol
+HC22,mole hr^-1 gridcell^-1,Glyoxal
+HC23,mole hr^-1 gridcell^-1,Methylglyoxal
+HC24,mole hr^-1 gridcell^-1,Biacetyl
+HC25,mole hr^-1 gridcell^-1,Phenols
+HC26,mole hr^-1 gridcell^-1,Cresols
+HC27,mole hr^-1 gridcell^-1,Methacrolein
+HC28,mole hr^-1 gridcell^-1,Methylvinyl ketone
+HC29,mole hr^-1 gridcell^-1,IPRD SAPRAC species (>C4 unsaturated aldehydes)
+HC30,mole hr^-1 gridcell^-1,Formic Acid
+HC31,mole hr^-1 gridcell^-1,Acetic Acid
+HC32,mole hr^-1 gridcell^-1,>C2 Acids
+HC33,mole hr^-1 gridcell^-1,Xylenols
+HC34,mole hr^-1 gridcell^-1,Catechols
+HC35,mole hr^-1 gridcell^-1,NonVolatile Compounds
+HC36,mole hr^-1 gridcell^-1,Propylene
+HC37,mole hr^-1 gridcell^-1,Acetylene
+HC38,mole hr^-1 gridcell^-1,Benzene
+HC39,mole hr^-1 gridcell^-1,Butanes
+HC40,mole hr^-1 gridcell^-1,Pentanes
+HC41,mole hr^-1 gridcell^-1,Toluene
+HC42,mole hr^-1 gridcell^-1,m-Xylene
+HC43,mole hr^-1 gridcell^-1,o-Xylene
+HC44,mole hr^-1 gridcell^-1,p-Xylene
+HC45,mole hr^-1 gridcell^-1,Propane
+HC46,mole hr^-1 gridcell^-1,Dienes
+HC47,mole hr^-1 gridcell^-1,Styrenes
+HC48,mole hr^-1 gridcell^-1,Ethanol
+HC49,mole hr^-1 gridcell^-1,Ethylene Glycol
+HC50,mole hr^-1 gridcell^-1,Unidentified_Unknown VOC
+HC51,mole hr^-1 gridcell^-1,Isopropyl Alcohol (OVCP)
+HC52,mole hr^-1 gridcell^-1,Propylene Glycol (OVCP)
+HC53,mole hr^-1 gridcell^-1,Glycerol (OVCP)
+PM01,metric_Ton hr^-1 gridcell^-1,Nonspeciated Primary PM2.5 (sum of PM08-PM19)
+PM02,metric_Ton hr^-1 gridcell^-1,Sulfate PM2.5
+PM03,metric_Ton hr^-1 gridcell^-1,Nitrate PM2.5
+PM04,metric_Ton hr^-1 gridcell^-1,Organic Carbon PM2.5
+PM05,metric_Ton hr^-1 gridcell^-1,Elemental Carbon PM2.5
+PM06,metric_Ton hr^-1 gridcell^-1,Non-Carbon Organic PM2.5
+PM07,metric_Ton hr^-1 gridcell^-1,Ammonium PM2.5
+PM08,metric_Ton hr^-1 gridcell^-1,Aluminum PM2.5
+PM09,metric_Ton hr^-1 gridcell^-1,Calcium PM2.5
+PM10,metric_Ton hr^-1 gridcell^-1,Iron PM2.5
+PM11,metric_Ton hr^-1 gridcell^-1,Water PM2.5
+PM12,metric_Ton hr^-1 gridcell^-1,Magnesium PM2.5
+PM13,metric_Ton hr^-1 gridcell^-1,Other PM2.5
+PM14,metric_Ton hr^-1 gridcell^-1,Potasium PM2.5
+PM15,metric_Ton hr^-1 gridcell^-1,Manganese PM2.5
+PM16,metric_Ton hr^-1 gridcell^-1,Chloride PM2.5
+PM17,metric_Ton hr^-1 gridcell^-1,Sodium PM2.5
+PM18,metric_Ton hr^-1 gridcell^-1,Titanium PM2.5
+PM19,metric_Ton hr^-1 gridcell^-1,Silicon PM2.5

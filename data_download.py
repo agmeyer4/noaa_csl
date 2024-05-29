@@ -165,6 +165,8 @@ class NOAA_CSL_download:
         sec_det = self.sector_details[sector] #get the details about the specific sector
         url_fname = self.url_fname_create(sec_det['url_fname_temp'],year_str,month_str) #create the filename
         full_url = os.path.join(self.base_noaa_url,sec_det['url_folder'],year_str,url_fname) #join them all
+        if (sector in ['area_onroad_gasoline','area_onroad_diesel']) & (year_str=='2021'): #there is a .gz on the FIVE 2021 data
+            full_url = full_url+'.gz'
         return full_url
     
     def wget_file(self,full_url,download_path):
@@ -324,24 +326,26 @@ def main():
     t1 = time.time()
     base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data' #where the data will be stored
     ncf.check_space(base_data_storage_path,excep_thresh='6Tb') #ensure there is enough space in the director
-    ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='COVID') #setup the downloader
+    ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='BAU') #setup the downloader
 
     # Single sector, single month
     #ncd.retrieve_format_data('area_OG',2020,1)
+
 
 
     # All sectors, single month
     # for sector in ncd.sector_details.keys(): #loop through sectors
     #     if sector in ['area_onroad_diesel','area_onroad_gasoline','area_offroad','area_OG']:
     #         continue
-    #     ncd.retrieve_format_data(sector,2020,1)
+    #     ncd.retrieve_format_data(sector,2021,5)
     
 
-    # All sectors, specific range
+    ## All sectors, specific range
     year = 2020
-    for month in range(2,7):
+    for month in range(2,13):
         for sector in ncd.sector_details.keys(): #loop through sectors
-            ncd.retrieve_format_data(sector,year,month)
+            if sector in ['area_onroad_diesel','area_onroad_gasoline','area_offroad']:
+                ncd.retrieve_format_data(sector,year,month)
 
     # Full Download
     # for year in [2019,2020,2021]:

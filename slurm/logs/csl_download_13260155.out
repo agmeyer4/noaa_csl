@@ -1,0 +1,35 @@
+Sufficient space detected in /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data
+Found 14Tb free space
+Downloading, extracting, and organizing data for area_onroad_gasoline 2020BAU Month01
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2020BAU/FIVE_onroad-gas_2020BAU_Month01.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2020BAU_Month01.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2020BAU_Month01.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month01
+Downloading, extracting, and organizing data for area_onroad_diesel 2020BAU Month01
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2020BAU/FIVE_onroad-dsl_2020BAU_Month01.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2020BAU_Month01.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2020BAU_Month01.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month01
+Downloading, extracting, and organizing data for area_offroad 2020BAU Month01
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2020BAU/FIVE_offroad_2020BAU_Month01.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2020BAU_Month01.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2020BAU_Month01.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month01
+Downloading, extracting, and organizing data for area_OG 2020 Month01
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/FOG-NEI17_Oil_and_Gas/2020/areaOG_emis_2020_Month01.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOG_emis_2020_Month01.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Path exists at /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/area_OG/2020/Month01
+Traceback (most recent call last):
+  File "/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/data_download.py", line 362, in <module>
+    main()
+  File "/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/data_download.py", line 348, in main
+    ncd.retrieve_format_data(sector,year,month)
+  File "/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/data_download.py", line 149, in retrieve_format_data
+    self.mv_extracted(dir_dict) #move the files to the correct locations
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/data_download.py", line 248, in mv_extracted
+    shutil.move(mv_from,mv_to) #move the files
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uufs/chpc.utah.edu/common/home/u0890904/software/pkg/miniconda3/envs/atmos_column1/lib/python3.11/shutil.py", line 823, in move
+    raise Error("Destination path '%s' already exists" % real_dst)
+shutil.Error: Destination path '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/area_OG/2020/Month01/weekdy' already exists

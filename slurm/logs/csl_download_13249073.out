@@ -1,0 +1,138 @@
+Sufficient space detected in /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data
+Found 15Tb free space
+Downloading, extracting, and organizing data for area_onroad_gasoline 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2021/FIVE_onroad-gas_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month06
+Downloading, extracting, and organizing data for area_onroad_diesel 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2021/FIVE_onroad-dsl_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month06
+Downloading, extracting, and organizing data for area_offroad 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2021/FIVE_offroad_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month06
+Downloading, extracting, and organizing data for area_OG 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/FOG-NEI17_Oil_and_Gas/2021/areaOG_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOG_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOG_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/wrk
+Downloading, extracting, and organizing data for area_AG 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaAG_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaAG_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaAG_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaAG
+Downloading, extracting, and organizing data for area_Industry 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaIndustry_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaIndustry_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaIndustry_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaIndustry
+Downloading, extracting, and organizing data for area_Other 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaOtherArea_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOtherArea_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOtherArea_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/OtherArea
+Downloading, extracting, and organizing data for area_VCP 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaVCP_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaVCP_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaVCP_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaVCP
+Downloading, extracting, and organizing data for point 2021 Month06
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/point/2021/point_emis_2021_Month06.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting point_emis_2021_Month06.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/point_emis_2021_Month06.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month06
+Downloading, extracting, and organizing data for area_onroad_gasoline 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2021/FIVE_onroad-gas_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_onroad_diesel 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2021/FIVE_onroad-dsl_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_offroad 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2021/FIVE_offroad_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_OG 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/FOG-NEI17_Oil_and_Gas/2021/areaOG_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOG_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOG_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/wrk
+Downloading, extracting, and organizing data for area_AG 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaAG_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaAG_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaAG_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaAG
+Downloading, extracting, and organizing data for area_Industry 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaIndustry_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaIndustry_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaIndustry_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaIndustry
+Downloading, extracting, and organizing data for area_Other 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaOtherArea_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOtherArea_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOtherArea_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/OtherArea
+Downloading, extracting, and organizing data for area_VCP 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaVCP_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaVCP_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaVCP_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaVCP
+Downloading, extracting, and organizing data for point 2021 Month07
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/point/2021/point_emis_2021_Month07.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting point_emis_2021_Month07.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/point_emis_2021_Month07.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month07
+Downloading, extracting, and organizing data for area_onroad_gasoline 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2021/FIVE_onroad-gas_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month08
+Downloading, extracting, and organizing data for area_onroad_diesel 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2021/FIVE_onroad-dsl_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month08
+Downloading, extracting, and organizing data for area_offroad 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2021/FIVE_offroad_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month08
+Downloading, extracting, and organizing data for area_OG 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/FOG-NEI17_Oil_and_Gas/2021/areaOG_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOG_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOG_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/wrk
+Downloading, extracting, and organizing data for area_AG 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaAG_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaAG_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaAG_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaAG
+Downloading, extracting, and organizing data for area_Industry 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaIndustry_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaIndustry_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaIndustry_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaIndustry
+Downloading, extracting, and organizing data for area_Other 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaOtherArea_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaOtherArea_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaOtherArea_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/OtherArea
+Downloading, extracting, and organizing data for area_VCP 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/area/2021/areaVCP_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting areaVCP_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/areaVCP_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/AreaVCP
+Downloading, extracting, and organizing data for point 2021 Month08
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/NRT_area-point_emissions/point/2021/point_emis_2021_Month08.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting point_emis_2021_Month08.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/point_emis_2021_Month08.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month08
+total runtime (seconds) = 6173.1325941085815

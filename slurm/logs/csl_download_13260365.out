@@ -1,0 +1,44 @@
+Sufficient space detected in /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data
+Found 14Tb free space
+Downloading, extracting, and organizing data for area_onroad_gasoline 2020BAU Month02
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2020BAU/FIVE_onroad-gas_2020BAU_Month02.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2020BAU_Month02.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2020BAU_Month02.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month02
+Downloading, extracting, and organizing data for area_onroad_diesel 2020BAU Month02
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2020BAU/FIVE_onroad-dsl_2020BAU_Month02.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2020BAU_Month02.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2020BAU_Month02.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month02
+Downloading, extracting, and organizing data for area_offroad 2020BAU Month02
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2020BAU/FIVE_offroad_2020BAU_Month02.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2020BAU_Month02.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2020BAU_Month02.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month02
+Downloading, extracting, and organizing data for area_onroad_gasoline 2020BAU Month03
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2020BAU/FIVE_onroad-gas_2020BAU_Month03.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2020BAU_Month03.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2020BAU_Month03.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month03
+Downloading, extracting, and organizing data for area_onroad_diesel 2020BAU Month03
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2020BAU/FIVE_onroad-dsl_2020BAU_Month03.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2020BAU_Month03.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2020BAU_Month03.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month03
+Downloading, extracting, and organizing data for area_offroad 2020BAU Month03
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2020BAU/FIVE_offroad_2020BAU_Month03.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_offroad_2020BAU_Month03.tar.gz into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_offroad_2020BAU_Month03.tar.gz
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month03
+Downloading, extracting, and organizing data for area_onroad_gasoline 2020BAU Month04
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_gasoline/2020BAU/FIVE_onroad-gas_2020BAU_Month04.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-gas_2020BAU_Month04.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-gas_2020BAU_Month04.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month04
+Downloading, extracting, and organizing data for area_onroad_diesel 2020BAU Month04
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/onroad_diesel/2020BAU/FIVE_onroad-dsl_2020BAU_Month04.tar to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Extracting FIVE_onroad-dsl_2020BAU_Month04.tar into /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
+Deleting /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/FIVE_onroad-dsl_2020BAU_Month04.tar
+Deleting tree /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp/Month04
+Downloading, extracting, and organizing data for area_offroad 2020BAU Month04
+Downloading https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/data/emissions/FIVE/offroad/2020BAU/FIVE_offroad_2020BAU_Month04.tar.gz to /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/.temp
