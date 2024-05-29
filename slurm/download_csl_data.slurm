@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --account=carbon-kp
-#SBATCH --partition=carbon-kp
+#SBATCH --account=lin-kp
+#SBATCH --partition=lin-kp
 #SBATCH -o ./logs/csl_download_%A.out
 
 source activate atmos_column1
