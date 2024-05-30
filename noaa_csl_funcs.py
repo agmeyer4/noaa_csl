@@ -171,7 +171,7 @@ def sanity_check(og_ds,regridded_ds,regridded_ds_cellarea,species):
     try:
         perc_diff = abs(regrid_sum-original_sum)/((regrid_sum+original_sum)/2)*100
     except ZeroDivisionError:
-        print('Sums are zero for both')
+        print(f'Sums are zero for {species}')
         return 0
     print(f'{round(perc_diff,3)}% difference between base and regridded sums for {species}')
     return perc_diff
