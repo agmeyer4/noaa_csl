@@ -178,4 +178,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-./slurm/logs/*
+slurm/logs/*
