@@ -11,7 +11,7 @@ More information can be found here: https://csl.noaa.gov/groups/csl7/measurement
 
 **** 
 A warning about storage space: One month of data from all sectors is approximately 131 Gigabytes. There is a function here that will alert
-the user if there is less than a defined amount (default = 6Tb) of space on the filesystem where the data will end up (base_data_storage_path). 
+the user if there is less than a defined amount (default = 6Tb) of space on the filesystem where the data will end up (base_path). 
 The dataset from 2019 Month01 to 2021 Month08 is approximately 4.5 Terabytes. Downloading this entire dataset will take ~13 hours. 
 ****
 
@@ -112,14 +112,14 @@ class NOAA_CSL_download:
         'point_VCP':'PtVCP'
     }
     
-    def __init__(self,base_data_storage_path,bau_or_covid='COVID'):
+    def __init__(self,base_path,bau_or_covid='COVID'):
         '''
         Args:
-        base_data_storage_path (str) : path to where the sector data will be stored
+        base_path (str) : path to where the sector data will be stored
         bau_or_covid (str) : for 2020 FIVE vehicle data, which version to use. Options are "BAU"-business as usual or "COVID"-covid
         '''
 
-        self.base_data_storage_path = base_data_storage_path
+        self.base_path = base_path
         self.bau_or_covid = bau_or_covid
 
     def retrieve_format_data(self,sector,year,month):
@@ -141,8 +141,8 @@ class NOAA_CSL_download:
             raise ValueError(f'The year {year_str} is not included in the sector details for {sector}, it likely does not exist on the server')
         full_url = self.full_url_create(sector,year_str,month_str) #create the URL to get the tar file from
         tar_fname = os.path.split(full_url)[1] #get the name of the tar file
-        os.makedirs(os.path.join(self.base_data_storage_path,'.temp'),exist_ok = True) #create a temporary path for downloading in the base data dir if necessary
-        download_path = os.path.join(self.base_data_storage_path,'.temp') #define the download path as a temp path
+        os.makedirs(os.path.join(self.base_path,'.temp'),exist_ok = True) #create a temporary path for downloading in the base data dir if necessary
+        download_path = os.path.join(self.base_path,'.temp') #define the download path as a temp path
         self.wget_file(full_url,download_path) #download the file
         self.extract_tar(os.path.join(download_path,tar_fname)) #extract it
         dir_dict = self.dir_dict_setup(sector,year_str,month_str,download_path) #define the directory organization for moving files 
@@ -213,7 +213,7 @@ class NOAA_CSL_download:
         dir_dict = {} #initialize the data dict
         if sector == 'point': #for the "point" sector, we must define different "subsectors" that will rise to top level sectors when moving
             for new_subsec, old_subsec in self.point_extract_structure.items():
-                to_path = os.path.join(self.base_data_storage_path,new_subsec,year_str,month_str)
+                to_path = os.path.join(self.base_path,new_subsec,year_str,month_str)
                 try: 
                     os.makedirs(to_path)
                 except:
@@ -223,7 +223,7 @@ class NOAA_CSL_download:
                     'to_path':to_path
                 }
         else: #if not point, then area
-            to_path = os.path.join(self.base_data_storage_path,sector,year_str,month_str) #the to path is defined here
+            to_path = os.path.join(self.base_path,sector,year_str,month_str) #the to path is defined here
             try: #try to make the directory
                 os.makedirs(to_path)
             except FileExistsError: #if it exists
@@ -324,14 +324,12 @@ class NOAA_CSL_download:
 def main():
     import time
     t1 = time.time()
-    base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data will be stored
-    ncf.check_space(base_data_storage_path,excep_thresh='6Tb') #ensure there is enough space in the director
-    ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='BAU') #setup the downloader
+    base_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data will be stored
+    ncf.check_space(base_path,excep_thresh='6Tb') #ensure there is enough space in the director
+    ncd = NOAA_CSL_download(base_path,bau_or_covid='BAU') #setup the downloader
 
     # Single sector, single month
     #ncd.retrieve_format_data('area_OG',2020,1)
-
-
 
     # All sectors, single month
     # for sector in ncd.sector_details.keys(): #loop through sectors

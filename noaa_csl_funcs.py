@@ -18,6 +18,7 @@ import xarray as xr
 import pyproj
 import numpy as np
 import xesmf as xe
+import pandas as pd
 
 ##################################################################################################################################
 # Define Functions
@@ -132,8 +133,8 @@ class Base_CSL_Handler:
     '''This class is built to handle the file storage and naming conventions for the "base" NOAA CSL inventory data, as downloaded and 
     orgainized using data_download.py. These are the raw netcdf files obtained from the NOAA servers'''
     
-    def __init__(self,base_data_storage_path,bau_or_covid):
-        self.base_data_storage_path = base_data_storage_path #location of the base data directory
+    def __init__(self,base_path,bau_or_covid):
+        self.base_path = base_path #location of the base data directory
         if bau_or_covid not in ['BAU','COVID']: #define if you want to use "business as usual" or "covid" for 2020 traffic data
             raise ValueError('The bau_or_covid input must be one of "BAU" or "COVID"')
         self.bau_or_covid = bau_or_covid
@@ -229,7 +230,7 @@ class Base_CSL_Handler:
 
         year_str = self.yr_to_yrstr(full_sector,year) #make the year a string
         month_str = month_int_to_str(month) #make the month a string of the form "MonthXX"
-        day_folder = os.path.join(self.base_data_storage_path,full_sector,year_str,month_str,day_type) #get the day folder
+        day_folder = os.path.join(self.base_path,full_sector,year_str,month_str,day_type) #get the day folder
         day_files = self.list_day_files(day_folder) #list all the files in the day folder
         for day_fname in day_files: #loop through files
             day_fullpath = os.path.join(day_folder,day_fname) #get the full path
