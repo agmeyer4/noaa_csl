@@ -84,7 +84,7 @@ def main():
     sectors = ncf.listdir_visible(base_path)
     years = [2019]
     months = [1]
-    day_types = ['satdy','sundy','weekdy']
+    day_types = ['weekdy']
     for sector in sectors:
         for year in years:
             for month in months:
