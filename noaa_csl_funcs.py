@@ -16,6 +16,7 @@ import shutil
 import glob
 import xarray as xr
 import pyproj
+import sys
 import numpy as np
 import xesmf as xe
 import pandas as pd
@@ -46,6 +47,25 @@ def month_int_to_str(month_int):
         Returns (str) : a string of form "MonthXX" where XX is the two digit month (1 --> Month01)'''
 
         return f'Month{month_int:02d}'
+
+def yr_to_yrstr(sector,year,bau_or_covid):
+        '''Converts a year to a string, and adds "COVID" or "BAU" to onroad/offroad data for 2020
+        
+        Args:
+        sector (str) : the sector string (example = area_OG)
+        year (int) : the year integer
+        
+        Returns:
+        year_str (str) : the year in string format and bau or covid if needed
+        '''
+
+        if sector not in ['area_onroad_gasoline','area_onroad_diesel','area_offroad']: #if it's not an onroad/offroad source, no bau or covid
+            return str(year) #so just return the string of the int
+        if year == 2020: #if it's 2020, there is a covid option for onroad/offroad
+            year_str = str(year)+bau_or_covid #use the input bau_or_covid variable to get correct string of form 2020COVID or 2020BAU
+        else:#if it's not 2020
+            year_str = str(year) #just use the year string 
+        return year_str
 
 def check_space(path,excep_thresh='8Tb'):
     '''Checks the amount of space on a filesystem given a path, and raise an error if the amount of space is below the threshold
@@ -228,7 +248,7 @@ class Base_CSL_Handler:
         day_fullpath (str) : full path to the data file defined by the inputs. If no files, returns None
         '''
 
-        year_str = self.yr_to_yrstr(full_sector,year) #make the year a string
+        year_str = yr_to_yrstr(full_sector,year,self.bau_or_covid) #make the year a string
         month_str = month_int_to_str(month) #make the month a string of the form "MonthXX"
         day_folder = os.path.join(self.base_path,full_sector,year_str,month_str,day_type) #get the day folder
         day_files = self.list_day_files(day_folder) #list all the files in the day folder
@@ -240,25 +260,6 @@ class Base_CSL_Handler:
                 continue #keep looping through the files in the day folder
         print("No matching files found") #if it gets here, there were no files that matched all of the input parameters
         return None #so we return none
-
-    def yr_to_yrstr(self,sector,year):
-        '''Converts a year to a string, and adds "COVID" or "BAU" to onroad/offroad data for 2020
-        
-        Args:
-        sector (str) : the sector string (example = area_OG)
-        year (int) : the year integer
-        
-        Returns:
-        year_str (str) : the year in string format and bau or covid if needed
-        '''
-
-        if sector not in ['area_onroad_gasoline','area_onroad_diesel','area_offroad']: #if it's not an onroad/offroad source, no bau or covid
-            return str(year) #so just return the string of the int
-        if year == 2020: #if it's 2020, there is a covid option for onroad/offroad
-            year_str = str(year)+self.bau_or_covid #use the input bau_or_covid variable to get correct string of form 2020COVID or 2020BAU
-        else:#if it's not 2020
-            year_str = str(year) #just use the year string 
-        return year_str
     
     def hour_matches(self,fname,hour_start):
         '''Check that the hour start matches in the filename
@@ -490,20 +491,6 @@ class CSL_Unit_Converter:
         data_var_list = list(ds.data_vars.keys())
         return data_var_list
 
-class RegridInputs:
-    '''A class to hold the inputs for the CSL regridder. These are the defaults.'''
-
-    grid_out = {  
-    'lat': np.arange(19, 58, 0.1), #Center Point Spacing Lat
-    'lon': np.arange(-138, -59, 0.1), #Center Point Spacing Lon
-    'lat_b': np.arange(18.95, 58.05, 0.1), # Boundary Spacing Lat 
-    'lon_b': np.arange(-138.05, -58.95, 0.1), # Boundary Spacing Lon
-    }
-    method = 'conservative'
-    input_dims=('south_north','west_east')
-    weights_path = '/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/regridding/saved_weights'
-    weights_file = 'create'
-
 class CSL_Regridder:
     '''A class to regrid the noaa_csl base data from lambert conformal coordinates into latitude/longitude coordinates'''
 
@@ -559,6 +546,7 @@ class CSL_Regridder:
         method = self.kwargs_or_inputs(kwargs,'method') #get the method from kwargs first then inputs
         input_dims = self.kwargs_or_inputs(kwargs,'input_dims') #get the input dims from kwargs firs then inputs
         weightsfile_or_create = self.kwargs_or_inputs(kwargs,'weights_file')
+
         if weightsfile_or_create == 'create': #if we're creating it from the in and out grids 
             regridder = xe.Regridder(grid_in,grid_out,method=method,input_dims=input_dims) #don't reuse weights, and just create it
         else: #if not, we're expecting a filepath 
@@ -687,7 +675,7 @@ class CSL_Regridder:
             save_path = self.inputs.weights_path
         
         if fname is None:
-            fname = f'lcc_to_latlon_{regridder.ds_attrs['sector_id']}_{regridder.ds_attrs['year']}_{regridder.ds_attrs['month']}_{regridder.ds_attrs['day_type']}.nc'
+            fname = f"lcc_to_latlon_{regridder.ds_attrs['sector_id']}_{regridder.ds_attrs['year']}_{regridder.ds_attrs['month']}_{regridder.ds_attrs['day_type']}.nc"
         
         regridder.to_netcdf(os.path.join(save_path,fname))
 

@@ -1,6 +1,11 @@
 # NOAA CSL Combined Inventory
 This python package is designed to deal with data from the NOAA CSL emissions inventory found at https://csl.noaa.gov/groups/csl7/measurements/2020covid-aqs/emissions/.   
 
+To run the code, you will need an appropriate conda environment. This can be created using the environment file by running (within the main git folder): 
+```
+> conda env create --file=environment.yml
+```
+
 Key capabilities of this package are currently:     
 1. Download all or a subset of the data from the link above, organize, and standardize the structure of the dataset. Note that downloading the entire dataset (through Aug 2021) will take ~20hrs and use ~5Tb of space. More details in download_data.py.
 2. Regrid the downloaded data from Lambert Conformal Coordinates to lat/long (WGS) coordinates. Functions to deal with base data inconsistencies, deal with units/attributes, etc. including sanity checks. More information in regrid_base_data.py and noaa_csl_dev.ipynb. 
