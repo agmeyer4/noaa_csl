@@ -324,7 +324,7 @@ class NOAA_CSL_download:
 def main():
     import time
     t1 = time.time()
-    base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data' #where the data will be stored
+    base_data_storage_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data will be stored
     ncf.check_space(base_data_storage_path,excep_thresh='6Tb') #ensure there is enough space in the director
     ncd = NOAA_CSL_download(base_data_storage_path,bau_or_covid='BAU') #setup the downloader
 
