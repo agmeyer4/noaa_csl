@@ -149,6 +149,33 @@ def listdir_visible(path):
     vis_list = [f for f in os.listdir(path) if not f.startswith('.')]
     return vis_list
 
+def sanity_check(og_ds,regridded_ds,regridded_ds_cellarea,species):
+    '''A sanity check using daily sums of a single species to see if the total before and after regridding is close
+    
+    Args:
+    og_ds (xr.Dataset) : the original dataset loaded from "base" noaa_csl data in LCC 
+    regridded_ds (xr.Dataset) : the regridded dataset in WGS
+    regridded_ds_cellarea (xr.Dataset) : a dataset with a cell_area data var giving the cell area in m2 for each cell in the regridded ds. from a loaded nc created by cdo gridarea 
+    species (str) : the species to check
+    
+    Returns:
+    perc_diff (float) : the difference (in percent) between the daily sum of all grid cells in the original versus the regridded dataset
+    '''
+    
+    original_sum = float(og_ds[species].sum().values)
+    #print('original_sum = ', original_sum)
+    regrid_daysum = regridded_ds[species].sum(dim='utc_hour')
+    regrid_daysum_absolute = regrid_daysum * regridded_ds_cellarea['cell_area']
+    regrid_sum = float(regrid_daysum_absolute.sum().values)
+    #print('regrid_sum = ', regrid_sum)
+    try:
+        perc_diff = abs(regrid_sum-original_sum)/((regrid_sum+original_sum)/2)*100
+    except ZeroDivisionError:
+        print('Sums are zero for both')
+        return 0
+    print(f'{round(perc_diff,3)}% difference between base and regridded sums for {species}')
+    return perc_diff
+
 class Base_CSL_Handler:
     '''This class is built to handle the file storage and naming conventions for the "base" NOAA CSL inventory data, as downloaded and 
     orgainized using data_download.py. These are the raw netcdf files obtained from the NOAA servers'''

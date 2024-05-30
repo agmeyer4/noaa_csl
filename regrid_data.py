@@ -46,11 +46,21 @@ def make_regrid_path(bau_or_covid,regridded_path,sector,year,month,day_type):
     except FileExistsError:
         raise FileExistsError('Folder already exists. You may end up overwriting data if you continue.')
     
-def regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,save_fname = 'default'):
+def regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,save_fname = 'default',sanity_check_specs = None):
     day_regrid_path = make_regrid_path(BCH.bau_or_covid,cr.inputs.regridded_path,sector,year,month,day_type)
     base_ds = BCH.load_fullday_nc(sector,year,month,day_type)
     ds_flx = unit_converter.absolute_to_flux(base_ds)
     regridded_ds = cr.regrid_ds(ds_flx)
+
+    if sanity_check_specs is not None:
+        grid_area = xr.open_dataset('./test/grid_out_area.nc')
+        for species in sanity_check_specs:
+            perc_diff = ncf.sanity_check(base_ds,regridded_ds,grid_area,species)
+            if perc_diff > 2.0:
+                print(f'*********Warning*********')
+                print(f'{round(perc_diff,2)}% difference between base and regridded sums for {species} {sector} {year} {month} {day_type}')
+                print('**************************')
+
     if save_fname == 'default':
         save_fname = f'{sector}_regridded.nc'
     print('Saving')
@@ -70,7 +80,8 @@ def main():
     inputs = RegridInputs(weights_file = weights_file)#Define the inputs. these are the defaults
     cr = ncf.CSL_Regridder(inputs) #create the regridder class
 
-    sectors = ['area_onroad_gasoline']
+    sanity_check_specs = ['CO2','CO','HC01','NOX']
+    sectors = ncf.listdir_visible(base_path)
     years = [2019]
     months = [1]
     day_types = ['satdy','sundy','weekdy']
@@ -79,7 +90,7 @@ def main():
             for month in months:
                 for day_type in day_types:
                     print(f'Regridding {sector} {year} {month} {day_type}')
-                    regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type)
+                    regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,sanity_check_specs=sanity_check_specs)
 
     t2 = time.time()
     print(f'total runtime (seconds) = {t2-t1}')
