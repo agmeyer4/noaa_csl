@@ -53,7 +53,7 @@ def regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,save_fname 
     regridded_ds = cr.regrid_ds(ds_flx)
 
     if sanity_check_specs is not None:
-        grid_area = xr.open_dataset('./test/grid_out_area.nc')
+        grid_area = xr.open_dataset('./regridding/grid_area/grid_out_area.nc')
         for species in sanity_check_specs:
             perc_diff = ncf.sanity_check(base_ds,regridded_ds,grid_area,species)
             if perc_diff > 2.0:
@@ -69,6 +69,7 @@ def regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,save_fname 
 #Define main function
 def main():
     t1 = time.time()
+    print(f'Starting at t1')
 
     # Regrid here
     base_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data downloaded using data_download.py lives
@@ -81,18 +82,25 @@ def main():
     cr = ncf.CSL_Regridder(inputs) #create the regridder class
 
     sanity_check_specs = ['CO2','CO','HC01','NOX']
-    sectors = ncf.listdir_visible(base_path)
+    sectors = ['area_VCP']#ncf.listdir_visible(base_path)
     years = [2019]
     months = [1]
-    day_types = ['weekdy']
+    day_types = ['weekdy','satdy','sundy']
     for sector in sectors:
+        if not sector.startswith('area'):
+            continue
         for year in years:
             for month in months:
                 for day_type in day_types:
                     print(f'Regridding {sector} {year} {month} {day_type}')
-                    regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,sanity_check_specs=sanity_check_specs)
+                    try:
+                        regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,sanity_check_specs=sanity_check_specs)
+                    except Exception as e:
+                        print(f'Error at {time.time()}')
+                        raise Exception(e)
 
     t2 = time.time()
+    print(f'ended at {t2}')
     print(f'total runtime (seconds) = {t2-t1}')
 
 if __name__ == "__main__":
