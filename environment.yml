@@ -15,4 +15,6 @@ dependencies:
   - dask
   - xesmf
   - scikit-image
+  - cdo
+  - python-cdo
   - pip:
