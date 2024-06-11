@@ -69,7 +69,7 @@ def regrid_and_save(BCH,unit_converter,cr,sector,year,month,day_type,save_fname 
 #Define main function
 def main():
     t1 = time.time()
-    print(f'Starting at t1')
+    print(f'Starting at {t1}')
 
     # Regrid here
     base_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data downloaded using data_download.py lives
