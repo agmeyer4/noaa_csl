@@ -59,6 +59,7 @@ year:
     2019
     2020 : all but onroad/offroad sectors
     2020BAU : for onroad and offroad sectors, business as usual
+    2020COVID: for onroad and offroad sectors, covid
     2021
 
 month: 
