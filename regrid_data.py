@@ -142,8 +142,6 @@ def main():
             for month in months: #loop through months
                 if (year==2021) & (month>8): #if we're in 2021 theres only data up to august
                     continue  #so just get to the end of the array
-                if (year==2021) & (month==5) & (sector=='area_OG'):#the og emissions are not in the base data as of June 12, 2024
-                    continue
                 for day_type in day_types: #loop through the day types
                     print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time

@@ -326,10 +326,10 @@ def main():
     t1 = time.time()
     base_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data will be stored
     ncf.check_space(base_path,excep_thresh='6Tb') #ensure there is enough space in the director
-    ncd = NOAA_CSL_download(base_path,bau_or_covid='BAU') #setup the downloader
+    ncd = NOAA_CSL_download(base_path,bau_or_covid='COVID') #setup the downloader
 
     # Single sector, single month
-    #ncd.retrieve_format_data('area_OG',2020,1)
+    ncd.retrieve_format_data('area_OG',2021,5)
 
     # All sectors, single month
     # for sector in ncd.sector_details.keys(): #loop through sectors
@@ -339,11 +339,11 @@ def main():
     
 
     ## All sectors, specific range
-    year = 2020
-    for month in range(2,13):
-        for sector in ncd.sector_details.keys(): #loop through sectors
-            if sector in ['area_onroad_diesel','area_onroad_gasoline','area_offroad']:
-                ncd.retrieve_format_data(sector,year,month)
+    # year = 2020
+    # for month in range(2,13):
+    #     for sector in ncd.sector_details.keys(): #loop through sectors
+    #         if sector in ['area_onroad_diesel','area_onroad_gasoline','area_offroad']:
+    #             ncd.retrieve_format_data(sector,year,month)
 
     # Full Download
     # for year in [2019,2020,2021]:
