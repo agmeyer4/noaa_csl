@@ -116,10 +116,14 @@ def main():
     Alert the user of times to track how long things are taking
     '''
 
+    print('Regridding NOAA data from base (Lambert Conical Conformal) to regridded (Lat/Lon)')
+
     t1 = time.time()
-    print(f'Starting at {t1}')
+    print(f'Git hash of this regrid = {ncf.get_githash()}')
+    print(f'Starting regrid at {t1}')
 
     base_path = '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/base' #where the data downloaded using data_download.py lives
+    print(f'Saving regridded .nc files to {base_path}')
     bau_or_covid = 'COVID'
     BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
     unit_converter = ncf.CSL_Unit_Converter() #setup the unit converter
