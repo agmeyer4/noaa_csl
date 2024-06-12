@@ -20,9 +20,35 @@ import sys
 import numpy as np
 import xesmf as xe
 import pandas as pd
+import git
 
 ##################################################################################################################################
 # Define Functions
+def get_githash():
+    '''Gets the git hash of the current code to save as metadata in regridded/changed objects
+    
+    Returns:
+    githash (str) : the hash of the current git commit
+    '''
+    repo = git.Repo(search_parent_directories=True)
+    sha = repo.head.object.hexsha
+    return sha
+
+def add_githash_to_ds(ds):
+    '''Adds the current git hash as an attribute to a dataset
+    
+    Args:
+    ds (xarray.DataSet): the dataset to add the hash to 
+    
+    Returns:
+    ds (xarray.DataSet) : the dataset with the current git hash added as "sha" attribute 
+    '''
+
+    git_sha = get_githash()
+    ds.attrs['git_sha'] = git_sha
+    return ds
+
+
 def replace_all_strs(text,dic):
     '''Replaces all strings contained in text matching the keys of dic with the values of dic
     
@@ -136,7 +162,7 @@ def bytes_to_human(bytes,units=['b','Kb','Mb','Gb','Tb','Pb']):
 
     return str(bytes) + units[0] if bytes < 1024 else bytes_to_human(bytes>>10, units[1:])
 
-def listdir_visible(path):
+def listdir_visible(path,add_path = False):
     '''Function to list only "visible" files/folders (not starting with a period)
     
     Args:
@@ -147,6 +173,8 @@ def listdir_visible(path):
     '''
     
     vis_list = [f for f in os.listdir(path) if not f.startswith('.')]
+    if add_path:
+        vis_list = [os.path.join(path,f) for f in vis_list]
     return vis_list
 
 def sanity_check(og_ds,regridded_ds,regridded_ds_cellarea,species):
@@ -171,9 +199,9 @@ def sanity_check(og_ds,regridded_ds,regridded_ds_cellarea,species):
     try:
         perc_diff = abs(regrid_sum-original_sum)/((regrid_sum+original_sum)/2)*100
     except ZeroDivisionError:
-        print(f'Sums are zero for {species}')
+        print(f'{species}: Sums are 0')
         return 0
-    print(f'{round(perc_diff,3)}% difference between base and regridded sums for {species}')
+    print(f'{species} sum diff = {round(perc_diff,3)}%')
     return perc_diff
 
 class Base_CSL_Handler:
@@ -545,7 +573,7 @@ class CSL_Regridder:
         except AttributeError: #if there isn't one yet, create it
             self.regridder = self.create_regridder(ds,**kwargs)
         
-        print('Regridding')
+        #print('Regridding')
         regridded_ds = self.regridder(ds,keep_attrs = True)#regrid the dataset
         old_attrs = list(regridded_ds.attrs.keys())
         kept_attrs = {} #select the attributes to keep (don't want to keep attributes from the old grid)
@@ -706,3 +734,10 @@ class CSL_Regridder:
         
         regridder.to_netcdf(os.path.join(save_path,fname))
 
+
+
+def main():
+    print(get_githash())
+
+if __name__ == "__main__":
+    main()
