@@ -17,4 +17,3 @@ dependencies:
   - scikit-image
   - cdo
   - python-cdo
-  - pip:
