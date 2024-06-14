@@ -1,9 +1,14 @@
 '''
 Module: regrid_data.py
 Author: Aaron G. Meyer (agmeyer4@gmail.com)
-Last Updated: May 2, 2024
+Last Updated: June 14, 2024
 Description:
-A script to regrid base data from LCC into lat/lon coordinates 
+A script to regrid base data from LCC into lat/lon coordinates. This module allows the user to regrid all or a subset of data
+from the NOAA CSL base coordinates into lat/lon coordinates at a defined grid spacing. Defaults are 0.1 degree grid spacing. 
+
+***NOTE***
+Regridding the entire dataset as of now (Jan 2019 - Aug 2021, BAU and COVID) takes about 30 hours and the produced dataset is 
+approximately 4Tb.
 '''
 
 #Import modules

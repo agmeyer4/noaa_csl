@@ -1,7 +1,7 @@
 '''
 Module: data_download.py
 Author: Aaron G. Meyer (agmeyer4@gmail.com)
-Last Updated: May 2, 2024
+Last Updated: June 14, 2024
 Description:
 This module allows a user to easily download inventory data from the NOAA servers based on sector, year, and month. The download class
 will find the correct url for getting the tar file, extract the tar file, format the filenames and directories in a consistent way, delete
