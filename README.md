@@ -6,10 +6,10 @@ To run the code, you will need an appropriate conda environment. This can be cre
 > conda env create --file=environment.yml
 ```
 
-Key capabilities of this package are currently:     
+Key elements of this package are currently:     
 1. data_download.py : Download all or a subset of the data from the link above, organize, and standardize the structure of the dataset. Note that downloading the entire dataset (through Aug 2021) will take ~20hrs and use ~5Tb of space. More details in download_data.py.
 
-2. regrid_data.py : Regrid the downloaded data from Lambert Conformal Coordinates to lat/long (WGS) coordinates, at a default of 0.01&deg; grid spacing. 
+2. regrid_data.py : Regrid the downloaded data from Lambert Conformal Coordinates to lat/long (WGS) coordinates, at a default of 0.1&deg; grid spacing. 
 
 3. noaa_csl_funcs.py : Useful functions to handle paths and organization, deal with base data inconsistencies, deal with units/attributes, sanity checks, regridding library, etc. 
 
@@ -17,7 +17,7 @@ Key capabilities of this package are currently:
 
 5. slurm : Folder containing scripts and logs for running the download and regrid scripts on slurm
 
-6. noaa_csl_dev.ipynb : Jupyter notebook used to develop useful functions for handling this large data archive. Shows examples. Ongoing development. 
+6. ipynbs : folder containing Jupyter notebooks used for illustrating examples, walking through code, debugging, and development. A good place to start if you are familiar. 
 
 For those on Utah CHPC, the data archives can be found at /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data. 
 
@@ -78,7 +78,7 @@ The regridded area data is at its inherent resolution of approximately 4kmx4km. 
 ## Ongoing Work
 The following ongoing development can be found in ./ipynbs/noaa_csl_dev.ipynb
 * Streamline loading of different sets of regridded data (spatial boundaries, datetime ranges, etc). 
-* Continue work on a "unit conversion" class to easily convert units for any of the species listed
+* Continue work on a "unit conversion" class to easily convert units for any of the species listed (especially HCXX variables). Tune to SAPRC molecular weights. 
 * Improve visualization capabilities
 # Contact and Acknowledgements
 This work is being carried out under the direction of Dr. John C. Lin in the Land-Atmosphere Interactions Research (LAIR) group at the University of Utah, Atmospheric Sciences Department. 
