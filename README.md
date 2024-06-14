@@ -38,7 +38,7 @@ For those on Utah CHPC, the data archives can be found at /uufs/chpc.utah.edu/co
 │   │   │   │   │   ├── daytype 
 │   │   │   │   │   │   ├── sector_regridded.nc 
 ```
-Where "base" data is the downloaded and organized data from the CSL servers, "regridded" data is are the regridded files, and:
+Where "base" data is the downloaded and organized data from the CSL servers, "regridded" data is are the regridded (or standardized in the case of point sectors) files, and:
 ```
 sectors: 
     area_ag = agriculture area sources (NEI2017)
@@ -70,6 +70,10 @@ daytype:
     sundy = sunday
     weekday = monday through friday
 ```
+
+*A note about point vs area sectors: The point data is simply lat/lon pairs and emisisions, so no "regrid" needs to be done. To retain the most information (not lose spatial resolution), I simply combined the 12hr base data and standardized attributes, naming convention, etc in the "regridded" folder path. Part of my ongoing work is building a streamlined way to aggregate all of the regridded area and point sources.
+
+The regridded area data is at its inherent resolution of approximately 4kmx4km. However, the point source data is precise. Thus, in a representation of emissions, we have sub-grid scale point data. Keeping it as such instead of incorporating into the grid allows for more sophisticated analysis on grid scaling applications. 
 
 ## Ongoing Work
 The following ongoing development can be found in ./ipynbs/noaa_csl_dev.ipynb
