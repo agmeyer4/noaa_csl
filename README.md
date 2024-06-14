@@ -70,6 +70,12 @@ daytype:
     sundy = sunday
     weekday = monday through friday
 ```
+
+## Ongoing Work
+The following ongoing development can be found in ./ipynbs/noaa_csl_dev.ipynb
+* Streamline loading of different sets of regridded data (spatial boundaries, datetime ranges, etc). 
+* Continue work on a "unit conversion" class to easily convert units for any of the species listed
+* Improve visualization capabilities
 # Contact and Acknowledgements
 This work is being carried out under the direction of Dr. John C. Lin in the Land-Atmosphere Interactions Research (LAIR) group at the University of Utah, Atmospheric Sciences Department. 
 

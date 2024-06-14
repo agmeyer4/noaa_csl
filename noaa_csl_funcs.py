@@ -285,7 +285,8 @@ class Base_CSL_Handler:
         for data_var in list(ds.data_vars.keys()): #for all of the data variables
             if data_var == 'NOX': #nox is a special case with a weird unit
                 ds[data_var].attrs['units'] = 'metric_Ton(NO2equiv) hr^-1' #get rid of the space between NO2 and equiv so the unit conveter works
-            ds[data_var].attrs['units'] = ds[data_var].attrs['units'] + ' gridcell^-1' #add ' gridcell^-1' to the units for clarity. all NOAA CSL base data is absolute unites i.e. "per gridcell"
+            if grid_type == 'area':
+                ds[data_var].attrs['units'] = ds[data_var].attrs['units'] + ' gridcell^-1' #add ' gridcell^-1' to the units for clarity. all NOAA CSL base data is absolute unites i.e. "per gridcell"
 
         return ds
 
