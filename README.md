@@ -17,7 +17,7 @@ Key elements of this package are currently:
 
 5. slurm : Folder containing scripts and logs for running the download and regrid scripts on slurm
 
-6. ipynbs : folder containing Jupyter notebooks used for illustrating examples, walking through code, debugging, and development. **A good place to start if you are familiar with using Jupyter is ipynbs/regridded_handling.ipynb. This will allow you to load data and play around**
+6. ipynbs : folder containing Jupyter notebooks used for illustrating examples, walking through code, debugging, and development. **A good place to start if you are familiar with using Jupyter is ipynbs/regridded_handling.ipynb. This will allow you to load data and play around** ***even if you aren't python savvy, take a look at these files directly in github to see what is possible***
 
 For those on Utah CHPC, the data archives can be found at /uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data. 
 
