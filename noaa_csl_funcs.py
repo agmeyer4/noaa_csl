@@ -21,6 +21,7 @@ import numpy as np
 import xesmf as xe
 import pandas as pd
 import git
+import calendar
 
 ##################################################################################################################################
 # Define Functions
@@ -203,6 +204,119 @@ def sanity_check(og_ds,regridded_ds,regridded_ds_cellarea,species):
         return 0
     print(f'{species} sum diff = {round(perc_diff,3)}%')
     return perc_diff
+
+def slice_extent(ds,extent):
+    '''Slice a dataset to a bounding box defined by the extent argument
+    
+    Args:
+    ds (xr.DataSet) : the dataset to process
+    extent (dict) : a dictionary with 4 elements defining the bounding box -- must include 'lat_min', 'lat_max', 'lon_min', 'lon_max' -- inclusive.
+
+    Returns:
+    ds (xr.DataSet) : the dataset clipped to within the extent range
+    '''
+
+    try:
+        grid_type = ds.attrs['grid_type']
+    except:
+        grid_type = 'area'
+    if grid_type == 'area': #if it's an area grid
+        ds = ds.sel(lat=slice(extent['lat_min'],
+                              extent['lat_max']),
+                    lon=slice(extent['lon_min'],
+                              extent['lon_max'])) #we can slice on the lat lon coordinates
+    elif grid_type == 'point': #if it's a point grid
+        ds = ds.where(((ds.lat>=extent['lat_min'])&
+                       (ds.lat<=extent['lat_max'])&
+                       (ds.lon>=extent['lon_min'])&
+                       (ds.lon<=extent['lon_max'])).compute(),drop=True) #we have to select the individual points using .where, and compute them. The drop term gets rid of NA's not in the extent
+    else: 
+        raise TypeError('Did not recognize the grid type, unsure how to slice')
+    
+    return ds 
+
+def ncount_satsunwkd(year,month):
+    '''Gets the number of saturdays, sundays and weekdays in a given month/year
+    
+    Args:
+    year (int) : the year
+    month (int) : the month, as an integer
+    
+    Returns:
+    sat_count (int) : number of saturdays
+    sun_count (int) : number of sundays
+    weekd_count (int) : number of weekdays
+    '''
+
+    num_days_in_month = calendar.monthrange(year,month)[1]
+    month_str = f'{month:02d}'
+
+    dow_ints = list(pd.date_range(start=f'{year}-{month_str}-01',end=f'{year}-{month_str}-{num_days_in_month}').weekday)
+    sat_count = len([ dow for dow in dow_ints if dow == 5 ])
+    sun_count = len([ dow for dow in dow_ints if dow == 6 ])
+    weekd_count = len([ dow for dow in dow_ints if dow < 5 ])
+    return sat_count,sun_count,weekd_count
+
+def get_point_sum_in_gc(row,point_df,species):
+    '''Calculates the sum of all of the point sources within a gridcell, according to a row with lat min/max and lon min/max repping that gridcell
+    
+    Args:
+    row (pd.DataFrame row) : a row or dictionary containing lat_min, lat_max, lon_min, lon_max -- the extent in which we want to sum
+    point_df (pd.DataFrame) : the point_df we want to get the sum within the extent of 
+    species (str) : species, should be one of the columns of point_df
+    
+    Returns:
+    (float) : the sum of all of the point sources for the in put species within the gridcell defined by the row
+    '''
+
+    subpointdf = point_df.loc[(point_df['lat'] >= row['lat_min'])&
+                 (point_df['lat'] <= row['lat_max'])&
+                 (point_df['lon'] >= row['lon_min'])&
+                 (point_df['lon'] <= row['lon_max'])]
+    return subpointdf[species].sum()
+
+def get_cellsize(ds):
+    '''Calculates the cell size for lat and lon by subtracting the second element from the first (assumes equal grid spacing throughout)
+    
+    Args:
+    ds (xarray.Dataset) : dtaset with lat and lon coordinates
+    
+    Returns:
+    lat_size : the size of a grid cell in latitude (degrees)
+    lon_size : the size of a grid cell in longitude (degrees)
+    '''
+
+    lat_size = float(ds['lat'][1]-ds['lat'][0]) #subtract the second element from the first
+    lon_size = float(ds['lon'][1]-ds['lon'][0])
+    return lat_size,lon_size
+
+def pointdf_to_ds(point_df,area_ds):
+    '''Transforms a point source dataframe into a dataset on the same grid spacing as an input area dataset
+    
+    Args:
+    point_df (pd.DataFrame) : dataframe with lat, lon and species that you wnat to transform into a dataset
+    area_ds (xarray.Dataset) : the form of the dataset you want to transform into -- will use this as the grid spacing
+    
+    Returns 
+    point_ds (xarray.Dataset) : a dataset on the same grid spacing as the area dataset with all point sources in each gridcell SUMMED
+    '''
+     
+    lat_size,lon_size = get_cellsize(area_ds) #get the grid spacing
+    if len(point_df.columns) == 3: #find the species, this assumes there are only 3 columns TODO deal with more columns
+        for col in point_df.columns:
+            if (col=='lat')|(col=='lon'):
+                continue
+            else:
+                species = col
+    df = area_ds.to_dataframe(name=species).reset_index()[['lat','lon']] #transoform the template ds into a df
+    df['lat_min'] = df.apply(lambda row: row['lat']-lat_size/2,axis = 1) # each min/max is calculated using the cell sizes
+    df['lat_max'] = df.apply(lambda row: row['lat']+lat_size/2,axis = 1)
+    df['lon_min'] = df.apply(lambda row: row['lon']-lon_size/2,axis = 1)
+    df['lon_max'] = df.apply(lambda row: row['lon']+lon_size/2,axis = 1)
+
+    df[species] = df.apply(lambda row: get_point_sum_in_gc(row,point_df,species),axis = 1) #add a column by summing all points in the gridcell
+    point_ds = df[['lat','lon',species]].set_index(['lat','lon']).to_xarray() #make it a dataset
+    return point_ds
 
 class Base_CSL_Handler:
     '''This class is built to handle the file storage and naming conventions for the "base" NOAA CSL inventory data, as downloaded and 
@@ -397,7 +511,6 @@ class Base_CSL_Handler:
             time_dim = time_dims[0] #should be the only one
         return time_dim
     
-
 class CSL_Unit_Converter:
     '''
     Class to handle unit conversino in the CSL datasets. Should work on both "base" data (prior to regridding), and "regridded" data. Since
@@ -735,7 +848,120 @@ class CSL_Regridder:
         
         regridder.to_netcdf(os.path.join(save_path,fname))
 
+class Regridded_CSL_Handler:
+    '''A class to handle NOAA CSL inventory data that has been regridded and organized by regrid_data.py'''
 
+    def __init__(self,regridded_path,bau_or_covid='COVID'):
+        '''Everything revolves around the "regridded_path", which determines sectors via the filenames contained within'''
+
+        self.regridded_path = regridded_path
+        self.sectors = self.get_sectors()
+        self.bau_or_covid = bau_or_covid
+
+    def get_sectors(self):
+        '''Lists the sectors in the regridded data storage path'''
+
+        sector_list = listdir_visible(self.regridded_path)
+        sectors = {'area':[],'point':[]}
+        for sector in sector_list:
+            if 'area' in sector:
+                sectors['area'].append(sector)
+            elif 'point' in sector:
+                sectors['point'].append(sector)
+            else:
+                raise ValueError(f"Unexpected sector type {sector}, not point or area.")
+        return sectors
+
+    def get_sector_subset_list(self,sector_subset):
+        '''Gets a subset of the sectors which could be one, all, or some
+        
+        Args:
+        sector_subset (str,list): "all" will return all sectors,  'point' will return point sectors, 'area' will return area sectors, a list will just return that list
+        
+        Returns:
+        sector_subset_list (list) : list of sectors in the subset. 
+        '''
+
+        if sector_subset == 'all':
+            sector_subset_list = []
+            for k,v in self.sectors.items():
+                sector_subset_list.extend(v)
+            return sector_subset_list
+        elif type(sector_subset)==str:
+            return self.sectors[sector_subset]
+        else:
+            return sector_subset
+
+    def get_days_in_range(self,dt1,dt2,day_types,sector_subset = 'all',add_path=True):
+        '''Gets all filepaths to the day_type level that are within a datetime range
+        
+        Args:
+        dt1 (datetime.date) : a date, datetime, etc to start the range (will only use year and month)
+        dt2 (datetime.date) : a date, datetime, etc to end the range (will only use year and month)
+        sectors (list) : list of sectors to include in the list
+        day_types (list) : list of day types to include in the list
+        add_path (bool, optional) : if true (default) it will add the regridded path to each element
+
+        Returns:
+        days_in_range (list) : list of paths to files that are within the date range and sector, day_types, etc. 
+        '''
+
+        dates_list = pd.date_range(dt1,dt2,freq = 'MS') #get a list of all the months between the dts
+        sector_subset_list = self.get_sector_subset_list(sector_subset)
+        days_in_range = []
+        for date in dates_list:
+            for sector in sector_subset_list:
+                for day_type in day_types:
+                    day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{month_int_to_str(date.month)}/{day_type}'
+                    if add_path:
+                        days_in_range.append(os.path.join(self.regridded_path,day_path))
+                    else:
+                        days_in_range.append(day_path)
+        return days_in_range
+    
+    def get_files_in_days(self,days_paths):
+        '''Gets the files that exist in the paths
+        
+        Args:
+        days_path (list) : list of paths to the days folders
+        
+        Returns:
+        files (list) : list of files in those days' paths'''
+
+        files = []
+        for day_path in days_paths:
+            files.extend(listdir_visible(day_path,add_path=True))
+        return files
+
+    def preprocess_regridded(self,ds,extent=None):
+        '''Preprocesses the regridded dataset when loaded to add attributes needed for concatenation
+        
+        Args:
+        ds (xr.DataSet) : the dataset to process
+        extent (dict) : a dictionary with 4 elements defining the bounding box -- must include 'lat_min', 'lat_max', 'lon_min', 'lon_max'. These are inclusive. Defaults to "None" which will return the whole ds
+        
+        Returns 
+        ds (xr.DataSet) : the dataset, with added coordinates taken from the attributes, sliced to the input extent
+        '''
+
+        grid_type = ds.attrs['grid_type']
+        if grid_type == 'area':
+            ds = ds.assign_coords(sector = 'area_'+ ds.attrs['sector_id']) #add back the area, was cut off in attributes for some reason
+        elif grid_type == 'point':
+            ds = ds.assign_coords(sector = 'point_'+ ds.attrs['sector_id']) #add back the point, was cut off in attributes for some reason
+
+        ds = ds.assign_coords(day_type = ds.attrs['day_type']) #assign the day_type coordinate
+        ds = ds.assign_coords(yr_mo=f'{ds.attrs['year']}-{ds.attrs['month']}') #assign the year/month coordinate
+        ds = ds.expand_dims(dim=['sector','day_type','yr_mo']) #make the coordinates into dimensions
+        if extent is not None:
+            ds = slice_extent(ds,extent) #slice to the bounding box extent
+
+        try:
+            del ds.attrs['nc_fpath'] #we don't need this attribute -- it points to an old nc path. 
+        except:
+            pass
+
+        return ds
 
 def main():
     print(get_githash())
