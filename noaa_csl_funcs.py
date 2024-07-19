@@ -257,6 +257,25 @@ def ncount_satsunwkd(year,month):
     weekd_count = len([ dow for dow in dow_ints if dow < 5 ])
     return sat_count,sun_count,weekd_count
 
+def get_daytype(dow):
+    '''Finds the day type from the numeric day of week
+    
+    Args:
+    dow (int) : day integer of the week Monday = 0, Sunday = 6
+
+    Returns:
+    day_type (str) : as satdy, sundy, or weekdy
+    '''
+    if dow == 5:
+        day_type = 'satdy'
+    elif dow == 6:
+        day_type = 'sundy'
+    elif dow <5:
+        day_type = 'weekdy'
+    else:
+        raise ValueError(f'Invalid day of week integer {dow} (should be between 0 and 6)')
+    return day_type
+
 def get_point_sum_in_gc(row,point_df,species):
     '''Calculates the sum of all of the point sources within a gridcell, according to a row with lat min/max and lon min/max repping that gridcell
     
@@ -290,7 +309,7 @@ def get_cellsize(ds):
     lon_size = float(ds['lon'][1]-ds['lon'][0])
     return lat_size,lon_size
 
-def pointdf_to_ds(point_df,area_ds):
+def pointdf_to_ds(point_df,area_ds,species):
     '''Transforms a point source dataframe into a dataset on the same grid spacing as an input area dataset
     
     Args:
@@ -951,7 +970,7 @@ class Regridded_CSL_Handler:
             ds = ds.assign_coords(sector = 'point_'+ ds.attrs['sector_id']) #add back the point, was cut off in attributes for some reason
 
         ds = ds.assign_coords(day_type = ds.attrs['day_type']) #assign the day_type coordinate
-        ds = ds.assign_coords(yr_mo=f'{ds.attrs['year']}-{ds.attrs['month']}') #assign the year/month coordinate
+        ds = ds.assign_coords(yr_mo=f"{ds.attrs['year']}-{ds.attrs['month']}") #assign the year/month coordinate
         ds = ds.expand_dims(dim=['sector','day_type','yr_mo']) #make the coordinates into dimensions
         if extent is not None:
             ds = slice_extent(ds,extent) #slice to the bounding box extent
