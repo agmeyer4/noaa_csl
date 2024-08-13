@@ -148,6 +148,7 @@ def main():
     '''
 
     #INITIAL SETUP
+    regrid_id = 2
     print('Regridding NOAA data from base (Lambert Conical Conformal) to regridded (Lat/Lon)')
     t1 = time.time()
     print(f'Git hash of this regrid = {ncf.get_githash()}')
@@ -158,16 +159,24 @@ def main():
     #Deal with the wights and regridder inputs
     #weights_file = 'lcc_to_latlon_onroad_gasoline_2019_1_weekdy.nc' #or 'create', for this I am using a weights file created from the onroad gas
     inputs = RegridInputs(weights_file = 'create')#Define the inputs.
+    inputs.grid_out = {
+                        'lat': np.arange(18.95, 58.05, 0.025),  # Center Point Spacing Lat
+                        'lon': np.arange(-138.05, -58.95, 0.025),  # Center Point Spacing Lon
+                        'lat_b': np.arange(18.95-0.0125, 58.05+0.0125, 0.025),  # Boundary Spacing Lat
+                        'lon_b': np.arange(-138.05-0.0125, -58.95+0.0125, 0.025),  # Boundary Spacing Lon
+                    }
+    inputs.regridded_path = f'/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded{regrid_id}'
     csl_regridder = ncf.CSL_Regridder(inputs) #create the regridder class
     
     print(f'Saving regridded .nc files to {inputs.regridded_path}')
 
     ########### Run the regrid all area sectors, all years, months, days, COVID
-    sanity_check_specs = ['CO2','CO','HC01','NOX'] #the species we are most interested in
+    species = ['CO2','CO','HC01','NOX'] #'all'
+    sanity_check_specs = species 
     bau_or_covid = 'COVID'
-    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
+    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     area_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('area')] #all of the area sectors in the base path
-    years = [2019,2020,2021] #all of the 
+    years = [2019]#,2020,2021] #all of the 
     months = list(range(1,13)) #all of the months 
     day_types = ['weekdy','satdy','sundy'] #all of the day types
     for sector in area_sectors: #loop through the sectors
@@ -178,36 +187,36 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs) #the main regrid function
+                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = f'./regridding/grid_area/grid_out_area{regrid_id}.nc') #the main regrid function
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
                     print('') #print a blank line between .nc files
 
     # ########### Run the regrid all area sectors, for 2020 business as usual traffic data
-    bau_or_covid = 'BAU'
-    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
-    bau_sectors = ['area_onroad_gasoline','area_onroad_diesel','area_offroad'] #the traffic data with bau data
-    years = [2020] #only 2020
-    months = list(range(1,13)) #all of the months 
-    day_types = ['weekdy','satdy','sundy'] #all of the day types
-    for sector in bau_sectors: #loop through the sectors
-        for year in years: #loop through years
-            for month in months: #loop through months
-                for day_type in day_types: #loop through the day types
-                    print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
-                    try: #put it in a try loop so we can log time
-                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs) #the main regrid function
-                    except Exception as e: #grab exceptions
-                        print(f'Error at {time.time()}') #print the time
-                        raise Exception(e) #still give the excption
-                    print('') #print a blank line between .nc files
+    # bau_or_covid = 'BAU'
+    # BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
+    # bau_sectors = ['area_onroad_gasoline','area_onroad_diesel','area_offroad'] #the traffic data with bau data
+    # years = [2020] #only 2020
+    # months = list(range(1,13)) #all of the months 
+    # day_types = ['weekdy','satdy','sundy'] #all of the day types
+    # for sector in bau_sectors: #loop through the sectors
+    #     for year in years: #loop through years
+    #         for month in months: #loop through months
+    #             for day_type in day_types: #loop through the day types
+    #                 print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
+    #                 try: #put it in a try loop so we can log time
+    #                     regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs) #the main regrid function
+    #                 except Exception as e: #grab exceptions
+    #                     print(f'Error at {time.time()}') #print the time
+    #                     raise Exception(e) #still give the excption
+    #                 print('') #print a blank line between .nc files
 
     ######## Standardize the point sources (no regrid, just attributes, nomenclature, combining)
     bau_or_covid = 'COVID'
-    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
+    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     point_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('point')] #all of the point sectors in the base path
-    years = [2019,2020,2021] 
+    years = [2019]#,2020,2021] 
     months = list(range(1,13)) #all of the months 
     day_types = ['weekdy','satdy','sundy'] #all of the day types
     for sector in point_sectors: #loop through the sectors
