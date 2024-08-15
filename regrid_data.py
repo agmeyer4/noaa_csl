@@ -173,25 +173,25 @@ def main():
     ########### Run the regrid all area sectors, all years, months, days, COVID
     species = ['CO2','CO','HC01','NOX'] #'all'
     sanity_check_specs = species 
-    bau_or_covid = 'COVID'
-    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
-    area_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('area')] #all of the area sectors in the base path
-    years = [2019]#,2020,2021] #all of the 
-    months = list(range(1,13)) #all of the months 
-    day_types = ['weekdy','satdy','sundy'] #all of the day types
-    for sector in area_sectors: #loop through the sectors
-        for year in years: #loop through years
-            for month in months: #loop through months
-                if (year==2021) & (month>8): #if we're in 2021 theres only data up to august
-                    continue  #so just get to the end of the array
-                for day_type in day_types: #loop through the day types
-                    print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
-                    try: #put it in a try loop so we can log time
-                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = f'./regridding/grid_area/grid_out_area{regrid_id}.nc') #the main regrid function
-                    except Exception as e: #grab exceptions
-                        print(f'Error at {time.time()}') #print the time
-                        raise Exception(e) #still give the excption
-                    print('') #print a blank line between .nc files
+    # bau_or_covid = 'COVID'
+    # BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
+    # area_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('area')] #all of the area sectors in the base path
+    # years = [2019]#,2020,2021] #all of the 
+    # months = list(range(1,13)) #all of the months 
+    # day_types = ['weekdy','satdy','sundy'] #all of the day types
+    # for sector in area_sectors: #loop through the sectors
+    #     for year in years: #loop through years
+    #         for month in months: #loop through months
+    #             if (year==2021) & (month>8): #if we're in 2021 theres only data up to august
+    #                 continue  #so just get to the end of the array
+    #             for day_type in day_types: #loop through the day types
+    #                 print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
+    #                 try: #put it in a try loop so we can log time
+    #                     regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = f'./regridding/grid_area/grid_out_area{regrid_id}.nc') #the main regrid function
+    #                 except Exception as e: #grab exceptions
+    #                     print(f'Error at {time.time()}') #print the time
+    #                     raise Exception(e) #still give the excption
+    #                 print('') #print a blank line between .nc files
 
     # ########### Run the regrid all area sectors, for 2020 business as usual traffic data
     # bau_or_covid = 'BAU'
