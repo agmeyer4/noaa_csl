@@ -341,11 +341,12 @@ class Base_CSL_Handler:
     '''This class is built to handle the file storage and naming conventions for the "base" NOAA CSL inventory data, as downloaded and 
     orgainized using data_download.py. These are the raw netcdf files obtained from the NOAA servers'''
     
-    def __init__(self,base_path,bau_or_covid):
+    def __init__(self,base_path,bau_or_covid,species='all'):
         self.base_path = base_path #location of the base data directory
         if bau_or_covid not in ['BAU','COVID']: #define if you want to use "business as usual" or "covid" for 2020 traffic data
             raise ValueError('The bau_or_covid input must be one of "BAU" or "COVID"')
         self.bau_or_covid = bau_or_covid
+        self.species = species
 
     def load_fullday_nc(self,full_sector,year,month,day_type,chunks = {}):
         '''Loads a full day of data from two 12-hour nc files in a day folder
@@ -393,6 +394,13 @@ class Base_CSL_Handler:
             raise ValueError(f'The input {full_sector} for full_sector does not start with "area" or "point". Something wrong here.')
         sector_id = '_'.join(full_sector.split('_')[1:]) #the full_sector without the "point" or "area" prepend
         
+        if self.species != 'all':
+            if grid_type == 'point':
+                keep_specs = self.species + ['ITYPE','STKht','STKdiam','STKtemp','STKve','STKflw','FUGht']
+                ds = ds[keep_specs]
+            else:
+                ds = ds[self.species]
+
         #set the attributes
         ds.attrs['grid_type'] = grid_type
         ds.attrs['sector_id'] = sector_id
@@ -887,6 +895,8 @@ class Regridded_CSL_Handler:
                 sectors['area'].append(sector)
             elif 'point' in sector:
                 sectors['point'].append(sector)
+            elif sector == 'details':
+                continue
             else:
                 raise ValueError(f"Unexpected sector type {sector}, not point or area.")
         return sectors
@@ -931,7 +941,8 @@ class Regridded_CSL_Handler:
         for date in dates_list:
             for sector in sector_subset_list:
                 for day_type in day_types:
-                    day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{month_int_to_str(date.month)}/{day_type}'
+                    #day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{month_int_to_str(date.month)}/{day_type}'
+                    day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{date.month:02d}/{day_type}'
                     if add_path:
                         days_in_range.append(os.path.join(self.regridded_path,day_path))
                     else:
