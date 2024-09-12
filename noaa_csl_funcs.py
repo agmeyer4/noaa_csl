@@ -895,6 +895,8 @@ class Regridded_CSL_Handler:
                 sectors['area'].append(sector)
             elif 'point' in sector:
                 sectors['point'].append(sector)
+            elif sector == 'details':
+                continue
             else:
                 raise ValueError(f"Unexpected sector type {sector}, not point or area.")
         return sectors
@@ -939,7 +941,8 @@ class Regridded_CSL_Handler:
         for date in dates_list:
             for sector in sector_subset_list:
                 for day_type in day_types:
-                    day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{month_int_to_str(date.month)}/{day_type}'
+                    #day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{month_int_to_str(date.month)}/{day_type}'
+                    day_path = f'{sector}/{yr_to_yrstr(sector,date.year,self.bau_or_covid)}/{date.month:02d}/{day_type}'
                     if add_path:
                         days_in_range.append(os.path.join(self.regridded_path,day_path))
                     else:
