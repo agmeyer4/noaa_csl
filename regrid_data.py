@@ -27,7 +27,7 @@ import xesmf as xe
 class RegridInputs():
     '''A class to hold the inputs for the CSL regridder. These are the defaults.'''
 
-    def __init__(self,**kwargs):
+    def __init__(self,regrid_id,**kwargs):
         self.grid_out = {
                         'lat': np.arange(18.95, 58.05, 0.025),  # Center Point Spacing Lat
                         'lon': np.arange(-138.05, -58.95, 0.025),  # Center Point Spacing Lon
@@ -38,7 +38,7 @@ class RegridInputs():
         self.input_dims=('south_north','west_east')
         #self.weights_path = '/uufs/chpc.utah.edu/common/home/u0890904/NOAA_CSL/noaa_csl/regridding/saved_weights'
         self.weights_file = 'create'
-        self.regridded_path =  '/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded'
+        self.regridded_path =  f'/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded{regrid_id}'
         for k,v in kwargs.items():
             if k in self.__dict__.keys():
                 setattr(self,k,v)
@@ -150,7 +150,6 @@ def main():
     '''
 
     #INITIAL SETUP
-    regrid_id = '_0.025deg' #the id for the regridded data
     print('Regridding NOAA data from base (Lambert Conical Conformal) to regridded (Lat/Lon)')
     t1 = time.time()
     print(f'Git hash of this regrid = {ncf.get_githash()}')
@@ -159,8 +158,10 @@ def main():
     unit_converter = ncf.CSL_Unit_Converter() #setup the unit converter
 
     #Define the regridder inputs
-    inputs = RegridInputs(weights_file = 'create')#Define the inputs.
-    inputs.regridded_path = f'/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded_{regrid_id}'
+    regrid_id = '_0.025deg' #the id for the regridded data
+    inputs = RegridInputs(regrid_id)#Define the inputs.
+    if not os.path.exists(inputs.regridded_path): #if the regridded path doesn't exist, make it
+        os.mkdir(inputs.regridded_path)
     print(f'Saving regridded .nc files to {inputs.regridded_path}')
 
     #Create the regridder
@@ -194,7 +195,7 @@ def main():
     BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     area_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('area')] #all of the area sectors in the base path
     years = [2019]#,2020,2021] #all of the 
-    months = list(range(1,3)) #all of the months 
+    months = list(range(1,13)) #all of the months 
     day_types = ['weekdy','satdy','sundy'] #all of the day types
     for sector in area_sectors: #loop through the sectors
         for year in years: #loop through years
@@ -204,38 +205,39 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
+                        #regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
+                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
                     print('') #print a blank line between .nc files
 
     # ########### Run the regrid all area sectors, for 2020 business as usual traffic data
-    # bau_or_covid = 'BAU'
-    # BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
-    # bau_sectors = ['area_onroad_gasoline','area_onroad_diesel','area_offroad'] #the traffic data with bau data
-    # years = [2020] #only 2020
-    # months = list(range(1,13)) #all of the months 
-    # day_types = ['weekdy','satdy','sundy'] #all of the day types
-    # for sector in bau_sectors: #loop through the sectors
-    #     for year in years: #loop through years
-    #         for month in months: #loop through months
-    #             for day_type in day_types: #loop through the day types
-    #                 print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
-    #                 try: #put it in a try loop so we can log time
-    #                     make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
-    #                     #regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
-    #                 except Exception as e: #grab exceptions
-    #                     print(f'Error at {time.time()}') #print the time
-    #                     raise Exception(e) #still give the excption
-    #                 print('') #print a blank line between .nc files
+    bau_or_covid = 'BAU'
+    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
+    bau_sectors = ['area_onroad_gasoline','area_onroad_diesel','area_offroad'] #the traffic data with bau data
+    years = [2020] #only 2020
+    months = list(range(1,13)) #all of the months 
+    day_types = ['weekdy','satdy','sundy'] #all of the day types
+    for sector in bau_sectors: #loop through the sectors
+        for year in years: #loop through years
+            for month in months: #loop through months
+                for day_type in day_types: #loop through the day types
+                    print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
+                    try: #put it in a try loop so we can log time
+                        #regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
+                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
+                    except Exception as e: #grab exceptions
+                        print(f'Error at {time.time()}') #print the time
+                        raise Exception(e) #still give the excption
+                    print('') #print a blank line between .nc files
 
     ####### Standardize the point sources (no regrid, just attributes, nomenclature, combining)
     bau_or_covid = 'COVID'
     BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     point_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('point')] #all of the point sectors in the base path
-    years = [2019]#,2020,2021] 
-    months = list(range(1,3)) #all of the months 
+    years = [2019,2020,2021] 
+    months = list(range(1,13)) #all of the months 
     day_types = ['weekdy','satdy','sundy'] #all of the day types
     for sector in point_sectors: #loop through the sectors
         for year in years: #loop through years
@@ -245,7 +247,8 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Combining hourly {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        combine_point_save(BCH,inputs.regridded_path,sector,year,month,day_type)
+                        #combine_point_save(BCH,inputs.regridded_path,sector,year,month,day_type)
+                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
