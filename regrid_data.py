@@ -150,7 +150,7 @@ def main():
     '''
 
     #INITIAL SETUP
-    regrid_id = 3
+    regrid_id = '_0.025deg' #the id for the regridded data
     print('Regridding NOAA data from base (Lambert Conical Conformal) to regridded (Lat/Lon)')
     t1 = time.time()
     print(f'Git hash of this regrid = {ncf.get_githash()}')
@@ -160,7 +160,7 @@ def main():
 
     #Define the regridder inputs
     inputs = RegridInputs(weights_file = 'create')#Define the inputs.
-    inputs.regridded_path = f'/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded{regrid_id}'
+    inputs.regridded_path = f'/uufs/chpc.utah.edu/common/home/lin-group9/agm/NOAA_CSL_Data/regridded_{regrid_id}'
     print(f'Saving regridded .nc files to {inputs.regridded_path}')
 
     #Create the regridder
