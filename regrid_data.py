@@ -194,7 +194,7 @@ def main():
     bau_or_covid = 'COVID'
     BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     area_sectors = [s for s in ncf.listdir_visible(base_path) if s.startswith('area')] #all of the area sectors in the base path
-    years = [2019]#,2020,2021] #all of the 
+    years = [2019,2020,2021] #all of the 
     months = list(range(1,13)) #all of the months 
     day_types = ['weekdy','satdy','sundy'] #all of the day types
     for sector in area_sectors: #loop through the sectors
@@ -205,8 +205,8 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        #regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
-                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path
+                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
+                        #make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
@@ -225,8 +225,8 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Regridding {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        #regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
-                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
+                        regrid_and_save(BCH,unit_converter,csl_regridder,sector,year,month,day_type,sanity_check_specs=sanity_check_specs,grid_area_path = os.path.join(details_path,"grid_out_area.nc")) #the main regrid function
+                        #make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
@@ -247,8 +247,8 @@ def main():
                 for day_type in day_types: #loop through the day types
                     print(f'Combining hourly {sector} {year} {month} {bau_or_covid} {day_type}')
                     try: #put it in a try loop so we can log time
-                        #combine_point_save(BCH,inputs.regridded_path,sector,year,month,day_type)
-                        make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
+                        combine_point_save(BCH,inputs.regridded_path,sector,year,month,day_type)
+                        #make_regrid_path(bau_or_covid,inputs.regridded_path,sector,year,month,day_type) #make the path                        
                     except Exception as e: #grab exceptions
                         print(f'Error at {time.time()}') #print the time
                         raise Exception(e) #still give the excption
