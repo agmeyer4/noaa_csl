@@ -214,7 +214,7 @@ def main():
 
     # ########### Run the regrid all area sectors, for 2020 business as usual traffic data
     bau_or_covid = 'BAU'
-    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid) #setup the base data handler
+    BCH = ncf.Base_CSL_Handler(base_path,bau_or_covid,species=species) #setup the base data handler
     bau_sectors = ['area_onroad_gasoline','area_onroad_diesel','area_offroad'] #the traffic data with bau data
     years = [2020] #only 2020
     months = list(range(1,13)) #all of the months 
