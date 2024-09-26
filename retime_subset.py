@@ -87,7 +87,7 @@ def main():
     dt_dss = {}
     for sector_type in sector_types:
         print('Reworking datetime for sector type:',sector_type)
-        dt_dss[sector_type] = rework_datetime(combined_dss[sector_type])
+        dt_dss[sector_type] = rework_datetime(combined_dss[sector_type]).load()
 
     #Save to nc
     save_path = '/uufs/chpc.utah.edu/common/home/u0890904/LAIR_1/Data/NC'
